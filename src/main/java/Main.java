@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Main {
-    public static ArrayList<String> tasks;
+    public static ArrayList<Task> tasks;
 
     public static void main(String[] args){
         tasks = new ArrayList<>();

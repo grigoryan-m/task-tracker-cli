@@ -1,30 +1,36 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class FileHandler {
-    private static int id;
-    private final ObjectOutput out;
-    private final BufferedReader bufferedReader;
-    static {
-        id = 0;
-    }
+    private final ObjectOutputStream out;
+    private final ObjectInputStream in;
     public FileHandler(){
         try {
-            fileWriter = new FileWriter(new File("data.json"), false);
-            bufferedReader = new BufferedReader(new FileReader("data.json"));
+            File file = new File("tasks.dat");
+            out = new ObjectOutputStream(new FileOutputStream(file));
+            in = new ObjectInputStream(new FileInputStream(file));
+            if(loadTasks()){
+                System.out.println("Tasks loaded!");
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    public boolean writeFile(String description, String status){
 
+    public void saveTasks(){
+        try {
+            out.writeObject(Main.tasks);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-    public boolean updateJSON(int id, String newDescription){
-
-        return true;
-    }
-
-    public static void main(String[] args){
-
+    public boolean loadTasks(){
+        try {
+            Main.tasks = (ArrayList<Task>) in.readObject();
+            return true;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("File doesn't exist!");
+            return false;
+        }
     }
 }
