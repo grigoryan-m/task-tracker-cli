@@ -31,6 +31,8 @@ public class InputHandler {
             }
             try {
                 Task task = new Task(split[1]);
+                Main.tasks.add(task);
+                Main.fileHandler.saveTasks();
             }catch(InvalidStatusException e){
                 System.out.println(e.getMessage());
             }
