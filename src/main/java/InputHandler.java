@@ -1,6 +1,4 @@
 import java.io.*;
-import java.util.HashMap;
-
 public class InputHandler {
     BufferedReader in;
 
@@ -29,13 +27,9 @@ public class InputHandler {
             if(split.length != 2){
                 throw new WrongArgumentListException("Wrong argument list!");
             }
-            try {
-                Task task = new Task(split[1]);
-                Main.tasks.add(task);
-                Main.fileHandler.saveTasks();
-            }catch(InvalidStatusException e){
-                System.out.println(e.getMessage());
-            }
+            Task task = new Task(split[1]);
+            Main.tasks.add(task);
+            Main.fileHandler.saveTasks();
         }
         else if(command.startsWith("update")){
             split = command.split(" ", 3);
@@ -69,6 +63,7 @@ public class InputHandler {
                     Main.tasks.get(i).setStatus("in-progress");
                 }
             }
+            Main.fileHandler.saveTasks();
         }
         else if(command.startsWith("mark-done")){
             split = command.split(" ", 2);
@@ -80,6 +75,7 @@ public class InputHandler {
                     Main.tasks.get(i).setStatus("done");
                 }
             }
+            Main.fileHandler.saveTasks();
         }
         else if(command.startsWith("list")){
             split = command.split(" ");

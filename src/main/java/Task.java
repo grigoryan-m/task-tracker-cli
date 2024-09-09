@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Task implements Serializable {
     public static int staticId;
@@ -8,10 +7,16 @@ public class Task implements Serializable {
     private String description;
     private String status;
 
-    public Task(String description) throws InvalidStatusException{
+    public Task(String description) {
         id = staticId++;
         this.description = description;
-        setStatus("todo");
+        this.status = "todo";
+    }
+
+    public Task(String description, String status) {
+        id = staticId++;
+        this.description = description;
+        this.status = status;
     }
 
     public void setStatus(String status) {

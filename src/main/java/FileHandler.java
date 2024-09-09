@@ -26,6 +26,7 @@ public class FileHandler {
                 Main.tasks = (ArrayList<Task>) in.readObject();
                 Task.staticId = in.readInt();
                 in.close();
+
                 return true;
             }
             System.out.println("File doesn't exist");
